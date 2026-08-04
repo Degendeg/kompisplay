@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* Klass-baserat mörkt läge: .dark på <html> styr allt som använder dark: */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-sky: #4fb6e8;
+  --color-sky-deep: #2f8fc4;
+  --color-sun: #ffc93c;
+  --color-sun-deep: #e8a800;
+  --color-forest: #2e7d5b;
+  --color-forest-deep: #1f5940;
+  --color-berry: #e8536c;
+  --color-berry-deep: #c93955;
+  --color-cream: #fff8ed;
+  --color-cream-soft: #fdeecb;
+  --color-ink: #1b3a34;
+  --color-night: #10222a;
+  --color-night-card: #17313b;
+
+  --font-display: "Fredoka", ui-rounded, "system-ui", sans-serif;
+  --font-body: "Nunito", "system-ui", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-berry);
+    outline-offset: 2px;
+    border-radius: 0.6rem;
+  }
+}
+
+/* Signaturrörelse: korten poppar lekfullt in, som studsande bollar */
+@keyframes wobble-in {
+  from {
+    transform: scale(0.94) rotate(-1.5deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes wobble-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.card-pop {
+  animation: wobble-in 0.35s ease-out both;
+}

@@ -44,7 +44,7 @@ export default function VideoPage() {
     <div className="flex flex-col gap-4">
       <Link
         to="/"
-        className="inline-flex items-center gap-1.5 self-start rounded-full bg-white px-4 py-2 font-display text-sm font-semibold text-forest transition hover:bg-forest/10 dark:bg-night-card dark:text-sun"
+        className="inline-flex items-center gap-1.5 self-start rounded-full bg-white px-4 py-2 font-display text-2xl font-semibold text-forest transition hover:bg-forest/10 dark:bg-night-card dark:text-sun"
       >
         <ArrowLeft size={16} />
         Tillbaka
@@ -53,7 +53,7 @@ export default function VideoPage() {
       <div className="aspect-video w-full overflow-hidden rounded-3xl bg-black shadow-md">
         <iframe
           className="h-full w-full"
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
           title={video?.title ?? "YouTube-video"}
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

@@ -1,8 +1,7 @@
 # Kompisplay 🐣
 
 En enkel och trygg videoapp för barn. Den visar **svenska** videor från YouTube
-med **SafeSearch strikt** aktiverat, har mörkt/ljust tema och fungerar bra på
-mobil, surfplatta och dator.
+med **SafeSearch strikt** aktiverat, har mörkt/ljust tema och är responsiv.
 
 ## Tekniker
 
@@ -11,7 +10,6 @@ mobil, surfplatta och dator.
 - React Router
 - YouTube Data API v3
 - Vitest + Testing Library
-- Redo att deployas på Vercel
 
 ## 1. Skaffa en YouTube API-nyckel
 
@@ -47,7 +45,7 @@ npm run preview
 
 ## 5. Deploya till Vercel
 
-1. Pusha koden till ett Git-repo (GitHub/GitLab/Bitbucket).
+1. Pusha koden till ett Git-repo.
 2. Importera repot på [vercel.com](https://vercel.com/new).
 3. Vercel upptäcker Vite automatiskt. Lägg till miljövariabeln
    `VITE_YOUTUBE_API_KEY` under **Project Settings → Environment Variables**.

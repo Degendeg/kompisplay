@@ -80,7 +80,7 @@ export async function searchVideos(query: string, pageToken?: string): Promise<S
   const params: Record<string, string> = {
     part: "snippet",
     type: "video",
-    maxResults: "24",
+    maxResults: "6",
     safeSearch: "strict",
     relevanceLanguage: "sv",
     regionCode: "SE",

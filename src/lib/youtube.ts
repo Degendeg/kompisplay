@@ -72,11 +72,31 @@ async function callYoutube<T>(path: string, params: Record<string, string>): Pro
 /**
  * Söker efter videor på svenska med SafeSearch satt till "strict".
  *
+ * Resultat cachelagras lokalt i 24 timmar för att minska antalet API-anrop
+ * och spara YouTube API quota.
+ *
  * OBS för föräldrar: relevanceLanguage/regionCode är hint till YouTube, inte
  * en absolut garanti att varje video är på svenska – kombinera med
  * medveten vägledning tillsammans med barnet.
  */
-export async function searchVideos(query: string, pageToken?: string): Promise<SearchResult> {
+export async function searchVideos(
+  query: string,
+  pageToken?: string
+): Promise<SearchResult> {
+  const cacheKey = `youtube:${query.toLowerCase()}:${pageToken ?? ""}`;
+  const cached = localStorage.getItem(cacheKey);
+
+  if (cached) {
+    const { timestamp, result } = JSON.parse(cached);
+
+    // 24 timmar
+    if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+      return result;
+    }
+
+    localStorage.removeItem(cacheKey);
+  }
+
   const params: Record<string, string> = {
     part: "snippet",
     type: "video",
@@ -87,17 +107,28 @@ export async function searchVideos(query: string, pageToken?: string): Promise<S
     q: query,
     key: getApiKey(),
   };
+
   if (pageToken) params.pageToken = pageToken;
 
-  const data = await callYoutube<{ items: RawSearchItem[]; nextPageToken?: string }>(
-    "search",
-    params
-  );
+  const data = await callYoutube<{
+    items: RawSearchItem[];
+    nextPageToken?: string;
+  }>("search", params);
 
-  return {
+  const result: SearchResult = {
     items: data.items.map(mapSearchItem),
     nextPageToken: data.nextPageToken,
   };
+
+  localStorage.setItem(
+    cacheKey,
+    JSON.stringify({
+      timestamp: Date.now(),
+      result,
+    })
+  );
+
+  return result;
 }
 
 export async function getVideoDetails(videoId: string): Promise<VideoDetails> {

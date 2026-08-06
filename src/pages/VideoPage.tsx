@@ -52,10 +52,11 @@ export default function VideoPage() {
 
       <div className="aspect-video w-full overflow-hidden rounded-3xl bg-black shadow-md">
         <iframe
+          key={videoId}
           className="h-full w-full"
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
           title={video?.title ?? "YouTube-video"}
-          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
       </div>

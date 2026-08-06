@@ -100,7 +100,7 @@ export async function searchVideos(
   const params: Record<string, string> = {
     part: "snippet",
     type: "video",
-    maxResults: "3",
+    maxResults: import.meta.env.VITE_MAX_RESULTS ?? "10",
     safeSearch: "strict",
     relevanceLanguage: "sv",
     regionCode: "SE",

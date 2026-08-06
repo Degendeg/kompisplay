@@ -10,7 +10,7 @@ export default function Layout() {
       </main>
       <footer className="px-4 py-6 text-center text-sm text-ink/60 dark:text-cream/50">
         Gjord för nyfikna barn &copy; {new Date().getFullYear()} <a
-          className="text-blue-600 underline underline-offset-2 hover:text-blue-800" href="mailto:test@mail.se">
+          className="text-blue-600 underline underline-offset-2 hover:text-blue-800" href="mailto:sebbed89@hotmail.com">
           Sebastian Degerman
         </a>
       </footer>

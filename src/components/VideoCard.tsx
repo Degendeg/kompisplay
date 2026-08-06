@@ -11,7 +11,7 @@ export default function VideoCard({ video }: VideoCardProps) {
       to={`/video/${video.id}`}
       className="card-pop group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:bg-night-card"
     >
-      <div className="aspect-[4/3] w-full overflow-hidden bg-sky/20">
+      <div className="h-52 w-full overflow-hidden bg-sky/20 sm:aspect-[4/3] sm:h-auto">
         {video.thumbnailUrl ? (
           <img
             src={video.thumbnailUrl}

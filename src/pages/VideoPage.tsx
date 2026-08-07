@@ -82,7 +82,7 @@ export default function VideoPage() {
           <p className="mt-1 text-sm font-semibold text-forest dark:text-sun">
             {video.channelTitle}
           </p>
-          <p className="mt-3 whitespace-pre-line text-sm text-ink/70 dark:text-cream/70">
+          <p className="mt-3 whitespace-pre-line break-words text-sm text-ink/70 dark:text-cream/70">
             {video.description || "Ingen beskrivning tillgänglig."}
           </p>
         </div>

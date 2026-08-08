@@ -10,6 +10,7 @@ export default function VideoPage() {
   const [video, setVideo] = useState<VideoDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [iframeKey, setIframeKey] = useState(0);
 
   useEffect(() => {
     if (!videoId) return;
@@ -50,9 +51,17 @@ export default function VideoPage() {
         Tillbaka
       </Link>
 
+      <div className="flex justify-end">
+        <button
+          onClick={() => setIframeKey((k) => k + 1)}
+          className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-forest shadow transition hover:bg-forest/10 dark:bg-night-card dark:text-sun"
+        >
+          🔄 Ladda om videon
+        </button>
+      </div>
       <div className="aspect-video w-full overflow-hidden rounded-3xl bg-black shadow-md">
         <iframe
-          key={videoId}
+          key={`${videoId}-${iframeKey}`}
           className="h-full w-full"
           src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
           title={video?.title ?? "YouTube-video"}

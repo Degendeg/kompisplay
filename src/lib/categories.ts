@@ -1,6 +1,7 @@
 import type { Category } from "../types";
 
 export const CATEGORIES: Category[] = [
+  { id: "favoriter", label: "Favoriter", emoji: "⭐", query: "" },
   { id: "bebisar", label: "Bebisar", emoji: "👶", query: "ta hand om bebis svenska" },
   { id: "sagor", label: "Sagor", emoji: "📖", query: "sagor för barn på svenska" },
   { id: "sanger", label: "Sånger", emoji: "🎵", query: "barnsånger på svenska" },
@@ -10,4 +11,4 @@ export const CATEGORIES: Category[] = [
   { id: "dans", label: "Dans & rörelse", emoji: "💃", query: "barndans rörelse svenska" },
 ];
 
-export const DEFAULT_CATEGORY = CATEGORIES[0];
+export const DEFAULT_CATEGORY = CATEGORIES[1];

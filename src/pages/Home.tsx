@@ -6,6 +6,7 @@ import VideoGrid from "../components/VideoGrid";
 import { DEFAULT_CATEGORY } from "../lib/categories";
 import { searchVideos, YoutubeConfigError } from "../lib/youtube";
 import type { Category, VideoSummary } from "../types";
+import { getFavorites } from "../lib/favorites";
 
 export default function Home() {
   const [activeCategoryId, setActiveCategoryId] = useState<string | undefined>(
@@ -40,6 +41,13 @@ export default function Home() {
   }, []);
 
   function handleCategorySelect(category: Category) {
+    if (category.id === "favoriter") {
+      setActiveCategoryId(category.id);
+      setVideos(getFavorites());
+      setError(null);
+      return;
+    }
+
     runSearch(category.query, category.id);
   }
 

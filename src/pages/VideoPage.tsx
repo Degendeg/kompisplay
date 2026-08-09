@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import StatusMessage from "../components/StatusMessage";
 import { getVideoDetails } from "../lib/youtube";
 import type { VideoDetails } from "../types";
+import { Star } from "lucide-react";
+import { isFavorite, toggleFavorite } from "../lib/favorites";
 
 export default function VideoPage() {
   const { videoId } = useParams<{ videoId: string }>();
@@ -11,6 +13,7 @@ export default function VideoPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [iframeKey, setIframeKey] = useState(0);
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     if (!videoId) return;
@@ -21,7 +24,10 @@ export default function VideoPage() {
 
     getVideoDetails(videoId)
       .then((details) => {
-        if (!isCancelled) setVideo(details);
+        if (!isCancelled) {
+          setVideo(details);
+          setFavorite(isFavorite(details.id));
+        }
       })
       .catch(() => {
         if (!isCancelled) {
@@ -52,6 +58,21 @@ export default function VideoPage() {
       </Link>
 
       <div className="flex justify-end">
+        <button
+          onClick={() => {
+            if (!video) return;
+
+            const newValue = toggleFavorite(video);
+            setFavorite(newValue);
+          }}
+          aria-label={favorite ? "Ta bort från favoriter" : "Lägg till i favoriter"}
+          className="rounded-full bg-white p-3 mr-3 text-forest shadow transition hover:bg-forest/10 dark:bg-night-card dark:text-sun"
+        >
+          <Star
+            size={24}
+            fill={favorite ? "currentColor" : "none"}
+          />
+        </button>
         <button
           onClick={() => setIframeKey((k) => k + 1)}
           className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-forest shadow transition hover:bg-forest/10 dark:bg-night-card dark:text-sun"
